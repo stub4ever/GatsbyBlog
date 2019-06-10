@@ -11,6 +11,7 @@ import { StaticQuery, graphql } from 'gatsby';
 import '../styles/index.scss';
 
 import Header from './header';
+import Footer from './Footer';
 
 const Layout = ({ children }) => (
     <StaticQuery
@@ -25,10 +26,16 @@ const Layout = ({ children }) => (
         `}
         render={data => (
             <>
+                <link
+                    rel="stylesheet"
+                    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.8.2/css/all.css"
+                    crossOrigin="anonymous"
+                />
                 <Header siteTitle={data.site.siteMetadata.title} />
                 <div className="container" id="content">
                     <main>{children}</main>
                 </div>
+                <Footer />
             </>
         )}
     />
