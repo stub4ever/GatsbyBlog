@@ -3,45 +3,33 @@ import Layout from '../components/layout';
 import SEO from '../components/seo';
 import { graphql, StaticQuery } from 'gatsby';
 import Post from '../components/Post';
-import { Row, Col } from 'reactstrap';
-import Sidebar from '../components/Sidebar';
-
 const IndexPage = () => (
-    <Layout>
+    <Layout pageTitle="CodeBlog">
         <SEO title="Home" />
-        <h1>Home Page</h1>
-        <Row>
-            <Col md="8">
-                <StaticQuery
-                    query={indexQuery}
-                    render={data => {
-                        return (
-                            <div>
-                                {data.allMarkdownRemark.edges.map(
-                                    ({ node }) => (
-                                        <Post
-                                            title={node.frontmatter.title}
-                                            author={node.frontmatter.author}
-                                            post={node.frontmatter.post}
-                                            date={node.frontmatter.date}
-                                            body={node.excerpt}
-                                            tags={node.frontmatter.tags}
-                                            fluid={
-                                                node.frontmatter.image
-                                                    .childImageSharp.fluid
-                                            }
-                                        />
-                                    )
-                                )}
-                            </div>
-                        );
-                    }}
-                />
-            </Col>
-            <Col md="4">
-                <Sidebar />
-            </Col>
-        </Row>
+        <StaticQuery
+            query={indexQuery}
+            render={data => {
+                console.log(data);
+                return (
+                    <div>
+                        {data.allMarkdownRemark.edges.map(({ node }) => (
+                            <Post
+                                key={node.id}
+                                title={node.frontmatter.title}
+                                author={node.frontmatter.author}
+                                slug={node.fields.slug}
+                                date={node.frontmatter.date}
+                                body={node.excerpt}
+                                tags={node.frontmatter.tags}
+                                fluid={
+                                    node.frontmatter.image.childImageSharp.fluid
+                                }
+                            />
+                        ))}
+                    </div>
+                );
+            }}
+        />
     </Layout>
 );
 
@@ -55,7 +43,6 @@ const indexQuery = graphql`
                         title
                         date(formatString: "MMM Do YYYY")
                         author
-                        post
                         tags
                         image {
                             childImageSharp {
@@ -64,6 +51,9 @@ const indexQuery = graphql`
                                 }
                             }
                         }
+                    }
+                    fields {
+                        slug
                     }
                     excerpt
                 }

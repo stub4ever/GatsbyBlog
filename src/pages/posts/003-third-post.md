@@ -2,7 +2,6 @@
 title: 'Third Post - CSS'
 date: 2019-05-24 07:00:00
 author: 'Joy Doe'
-post: '/third-post'
 image: ../../images/javascript.jpg
 tags:
     - design
