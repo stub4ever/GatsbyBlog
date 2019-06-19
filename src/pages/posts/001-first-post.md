@@ -1,7 +1,7 @@
 ---
 title: 'First Post - introduction'
 date: 2019-05-22 07:00:00
-author: 'Jason Lee'
+author: 'John Doe'
 image: ../../images/javascript.jpg
 tags:
     - code
